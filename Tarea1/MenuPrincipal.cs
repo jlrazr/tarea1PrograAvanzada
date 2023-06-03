@@ -28,7 +28,7 @@ internal class Program
                     Helpers.RegistrarPlato(managerPlatos, managerCategPlatos);
                     break;
                 case 4:
-                    // Call method to register clients
+                    Helpers.RegistrarCliente(managerClientes);
                     break;
                 case 5:
                     // Call method to register dishes per each restaurant
@@ -43,7 +43,7 @@ internal class Program
                     Helpers.mostrarPlatos(managerPlatos);
                     break;
                 case 9:
-                    // Call method to query clients
+                    Helpers.MostrarClientes(managerClientes);
                     break;
                 case 10:
                     // Call method to query dishes per restaurant
@@ -62,7 +62,7 @@ internal class Program
             Console.WriteLine("\nMENÚ PRINCIPAL");
             Console.WriteLine("-------------------------------------------------------------------------");
             Console.WriteLine("1. Registrar restaurante");
-            Console.WriteLine("2. Registrar categorias para los platos");
+            Console.WriteLine("2. Registrar categorias de platos");
             Console.WriteLine("3. Registrar platos");
             Console.WriteLine("4. Registrar clientes");
             Console.WriteLine("5. Registrar platos para un restaurante");

@@ -111,7 +111,7 @@ namespace Tarea1
                 {
                     if (plato != null)
                     {
-                        Console.WriteLine($"ID: {plato.Id}, Nombre: {plato.Nombre}, PRecio: {plato.Precio}, ID de la categoría: {plato.Categoria.Id}, Descripción de la categoría: {plato.Categoria.Descripcion}");
+                        Console.WriteLine($"ID: {plato.Id}, Nombre: {plato.Nombre}, Precio: {plato.Precio}, ID de la categoría: {plato.Categoria.Id}, Descripción de la categoría: {plato.Categoria.Descripcion}");
                     }
                 }
                 Console.Write("\n\n---------  Fin de la lista de platos  ---------");
@@ -169,12 +169,56 @@ namespace Tarea1
 
         public static void RegistrarCliente(ManagerClientes manager)
         {
+            Console.Write("Ingrese el nombre del cliente (sin apellidos): ");
+            string nombre = Console.ReadLine();
 
+            Console.Write("Ingrese el primer apellido del cliente: ");
+            string primApellido = Console.ReadLine();
+
+            Console.Write("Ingrese el segundo apellido del cliente: ");
+            string segApellido = Console.ReadLine();
+
+            Console.Write("Ingrese la fecha de nacimiento del cliente con el formato mm/dd/aaaa: ");
+            DateTime fechaNacim = DateTime.Parse(Console.ReadLine());
+
+            Console.Write("Ingrese el género del cliente M/F: ");
+            char genero = Char.ToUpper(Console.ReadKey().KeyChar);
+
+            Cliente cliente = new(nombre, primApellido, segApellido, fechaNacim, genero);
+
+            manager.Registrar(cliente);
+
+            Console.Write("\nDesea ingresar otro cliente? (s) para confirmar: ");
+            string eleccion = Console.ReadLine();
+
+            if (eleccion == "s")
+            {
+                RegistrarCliente(manager);
+            }
         }
 
         public static void MostrarClientes(ManagerClientes manager)
         {
+            Cliente[] clientes = manager.GetTodos();
 
+            if (clientes[0] != null)
+            {
+                Console.WriteLine($"El número de entradas en clientes es: {clientes.Length}");
+                Console.Write("---------  Inicio de la lista de clientes  ---------\n\n");
+                Console.Write("Los clientes registrados son: \n\n");
+                foreach (var cliente in clientes)
+                {
+                    if (cliente != null)
+                    {
+                        Console.WriteLine($"ID: {cliente.Id}, Nombre: {cliente.Nombre}, Apellidos: {cliente.PrimApellido} {cliente.SegApellido}, Género: {cliente.Genero}");
+                    }
+                }
+                Console.Write("\n\n---------  Fin de la lista de clientes  ---------");
+            }
+            else
+            {
+                Console.WriteLine("No existen registros de clientes.");
+            }
         }
     }
 }
