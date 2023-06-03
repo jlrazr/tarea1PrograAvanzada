@@ -1,0 +1,15 @@
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\bin\Debug\net6.0\Tarea1.exe
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\bin\Debug\net6.0\Tarea1.deps.json
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\bin\Debug\net6.0\Tarea1.runtimeconfig.json
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\bin\Debug\net6.0\Tarea1.dll
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\bin\Debug\net6.0\Tarea1.pdb
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\obj\Debug\net6.0\Tarea1.csproj.AssemblyReference.cache
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\obj\Debug\net6.0\Tarea1.GeneratedMSBuildEditorConfig.editorconfig
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\obj\Debug\net6.0\Tarea1.AssemblyInfoInputs.cache
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\obj\Debug\net6.0\Tarea1.AssemblyInfo.cs
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\obj\Debug\net6.0\Tarea1.csproj.CoreCompileInputs.cache
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\obj\Debug\net6.0\Tarea1.dll
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\obj\Debug\net6.0\refint\Tarea1.dll
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\obj\Debug\net6.0\Tarea1.pdb
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\obj\Debug\net6.0\Tarea1.genruntimeconfig.cache
+D:\UNED\IIQ2023\Programacion Avanzada\Tarea1\Tarea1\Tarea1\obj\Debug\net6.0\ref\Tarea1.dll
