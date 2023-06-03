@@ -58,7 +58,7 @@ namespace Tarea1
             }
         }
 
-        public static void RegistrarPlato(ManagerPlatos managerPlatos, ManagerCategPlatos managerCategPlatos) // Broken from here as the vars names are wrong.
+        public static void RegistrarPlato(ManagerPlatos managerPlatos, ManagerCategPlatos managerCategPlatos)
         {
             Console.Write("Ingrese el nombre del plato: ");
             string nombre = Console.ReadLine();
@@ -210,7 +210,7 @@ namespace Tarea1
                 {
                     if (cliente != null)
                     {
-                        Console.WriteLine($"ID: {cliente.Id}, Nombre: {cliente.Nombre}, Apellidos: {cliente.PrimApellido} {cliente.SegApellido}, Género: {cliente.Genero}");
+                        Console.WriteLine($"ID: {cliente.Id}, Nombre: {cliente.Nombre}, Apellidos: {cliente.PrimApellido} {cliente.SegApellido}, Género: {cliente.Genero}, Fecha de nacimiento: {cliente.FechaNacimiento}");
                     }
                 }
                 Console.Write("\n\n---------  Fin de la lista de clientes  ---------");
@@ -218,6 +218,55 @@ namespace Tarea1
             else
             {
                 Console.WriteLine("No existen registros de clientes.");
+            }
+        }
+
+        public static void RegistrarRestaurantePlato(ManagerRestaurantePlatos managerRestPlato, ManagerRestaurantes managerRest, ManagerPlatos managerPlato)
+        {
+            Console.Write("Ingrese el ID del restaurante: ");
+            int idRestaurante = Convert.ToInt32(Console.ReadLine());
+
+            Console.Write("Ingrese el ID del plato: ");
+            int idPlato = Convert.ToInt32(Console.ReadLine());
+
+            // Revisa si existen los IDs ingresados
+            if (managerRest.GetPorId(idRestaurante) != null && managerPlato.GetPorId(idPlato) != null)
+            {
+                RestaurantePlato restPlato = new(idRestaurante, idPlato);
+
+                managerRestPlato.Registrar(restPlato);
+                Console.WriteLine("Dish successfully registered to restaurant!");
+            }
+            else
+            {
+                Console.WriteLine("El ID del restaurante o plato es inválido.");
+            }
+        }
+
+        public static void MostrarRestaurantePlato(ManagerRestaurantePlatos managerRestPlato, ManagerRestaurantes managerRest, ManagerPlatos managerPlato)
+        {
+            Console.Write("Ingrese el ID del restaurante: ");
+            int idRestaurante = Convert.ToInt32(Console.ReadLine());
+
+            // Valida que el restaurante exista
+            if (managerRest.GetPorId(idRestaurante) != null)
+            {
+                Restaurante restaurante = managerRest.GetPorId(idRestaurante);
+                Console.WriteLine($"El restaurante elegido es:\nID: {restaurante.Id}, Nombre: {restaurante.Nombre}, Dirección: {restaurante.Direccion}, Activo: {restaurante.Activo}, Teléfono: {restaurante.Telefono}");
+                Console.WriteLine($"Los platos asociados al restaurante {managerRest.GetPorId(idRestaurante).Nombre} son:\n");
+                
+                foreach (var restaurantePlato in managerRestPlato.GetTodos())
+                {
+                    if (restaurantePlato != null && restaurantePlato.IdRestaurante == idRestaurante)
+                    {
+                        var plato = managerPlato.GetPorId(restaurantePlato.IdPlato);
+                        Console.WriteLine($"ID del plato: {plato.Id}, nombre: {plato.Nombre}, Precio: {plato.Precio}, ID de la categoría: {plato.Categoria.Id}, Descripción de la categoría: {plato.Categoria.Descripcion}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("Id de restaurante inválido.");
             }
         }
     }

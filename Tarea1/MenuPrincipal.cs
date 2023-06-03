@@ -7,6 +7,7 @@ internal class Program
     public static ManagerPlatos managerPlatos = new();
     public static ManagerCategPlatos managerCategPlatos = new();
     public static ManagerClientes managerClientes = new();
+    public static ManagerRestaurantePlatos managerRestPlatos = new();
 
     private static void Main(string[] args)
     {
@@ -19,34 +20,44 @@ internal class Program
             switch (eleccion)
             {
                 case 1:
+                    Console.Clear();
                     Helpers.RegistrarRestaurante(managerRest);
                     break;
                 case 2:
+                    Console.Clear();
                     Helpers.RegistrarCategPlatos(managerCategPlatos);
                     break;
                 case 3:
+                    Console.Clear();
                     Helpers.RegistrarPlato(managerPlatos, managerCategPlatos);
                     break;
                 case 4:
+                    Console.Clear();
                     Helpers.RegistrarCliente(managerClientes);
                     break;
                 case 5:
-                    // Call method to register dishes per each restaurant
+                    Console.Clear();
+                    Helpers.RegistrarRestaurantePlato(managerRestPlatos, managerRest, managerPlatos);
                     break;
                 case 6:
+                    Console.Clear();
                     Helpers.MostrarRestaurantes(managerRest);
                     break;
                 case 7:
+                    Console.Clear();
                     Helpers.MostrarCategPlatos(managerCategPlatos);
                     break;
                 case 8:
+                    Console.Clear();
                     Helpers.mostrarPlatos(managerPlatos);
                     break;
                 case 9:
+                    Console.Clear();
                     Helpers.MostrarClientes(managerClientes);
                     break;
                 case 10:
-                    // Call method to query dishes per restaurant
+                    Console.Clear();
+                    Helpers.MostrarRestaurantePlato(managerRestPlatos, managerRest, managerPlatos);
                     break;
                 case 11:
                     Console.WriteLine("Saliendo...");

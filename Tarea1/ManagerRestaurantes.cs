@@ -23,5 +23,18 @@ namespace Tarea1
         {
             return _restaurantes;
         }
+
+        public Restaurante GetPorId(int id)
+        {
+            foreach (var restaurante in _restaurantes)
+            {
+                if (restaurante != null && restaurante.Id == id)
+                {
+                    return restaurante;
+                }
+            }
+
+            return null;
+        }
     }
 }

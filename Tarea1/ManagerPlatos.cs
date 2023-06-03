@@ -20,5 +20,18 @@ namespace Tarea1
         {
             return _platos;
         }
+
+        public Plato GetPorId(int id)
+        {
+            foreach (var plato in _platos)
+            {
+                if (plato != null && plato.Id == id)
+                {
+                    return plato;
+                }
+            }
+
+            return null;
+        }
     }
 }
