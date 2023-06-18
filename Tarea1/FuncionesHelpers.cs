@@ -378,7 +378,7 @@ namespace Tarea1
                     {
                         Restaurante restaurante = managerRest.GetPorId(idRestaurante);
                         Console.WriteLine($"El restaurante elegido es:\nID: {restaurante.Id}, Nombre: {restaurante.Nombre}, Dirección: {restaurante.Direccion}, Activo: {restaurante.Activo}, Teléfono: {restaurante.Telefono}");
-                        Console.WriteLine($"Los platos asociados al restaurante {managerRest.GetPorId(idRestaurante).Nombre} son:\n");
+                        Console.WriteLine($"Los platos asociados al restaurante {managerRest.GetPorId(idRestaurante).Nombre} son: ");
 
                         foreach (var restaurantePlato in managerRestPlato.GetTodos())
                         {
@@ -397,6 +397,14 @@ namespace Tarea1
                 catch (FormatException)
                 {
                     Console.Write("Debe ingresar un ID válido.\n");
+                }
+
+                Console.Write("\nDesea mostrar los platos de otro restaurante? (s) para confirmar: ");
+                string eleccion = Console.ReadLine();
+
+                if (eleccion == "s")
+                {
+                    MostrarRestaurantePlato(managerRestPlato, managerRest, managerPlato);
                 }
             }
         }
