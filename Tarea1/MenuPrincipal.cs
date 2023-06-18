@@ -95,7 +95,6 @@ internal class Program
             }
             catch (FormatException)
             {
-                Console.WriteLine("Opción inválida. Por favor ingrese un número entre 1 y 11.");
                 eleccion = MuestraMenu(); // Muestra el menú de nuevo si se ingresa un valor incorrecto
             }
 

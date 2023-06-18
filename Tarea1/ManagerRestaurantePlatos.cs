@@ -12,13 +12,11 @@ namespace Tarea1
             if (_cuentaRestaurantePlatos < 20)
             {
                 _restaurantePlatos[_cuentaRestaurantePlatos++] = restaurantePlato;
-                Console.WriteLine("El plato fue registrado en el restaurante elegido con éxito.");
             } else
             {
                 Console.WriteLine("El número máximo de platos (20) ya se ha alcanzado.");
             }
         }
-
         public RestaurantePlato[] GetTodos()
         {
             return _restaurantePlatos;

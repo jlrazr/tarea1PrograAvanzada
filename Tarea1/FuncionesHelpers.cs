@@ -2,6 +2,7 @@
 using System;
 using System.Diagnostics;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace Tarea1
 {
@@ -11,6 +12,13 @@ namespace Tarea1
         {
             Console.Write("Ingrese el nombre del restaurante: ");
             string nombre = Console.ReadLine();
+            while (nombre == "")
+            {
+                Console.Write("Debe ingresar un nombre válido.\n");
+                Console.Write("Ingrese el nombre del restaurante: ");
+                nombre = Console.ReadLine();
+            }
+
 
             Console.Write("Ingrese la dirección del restaurante: ");
             string direccion = Console.ReadLine();
@@ -62,9 +70,29 @@ namespace Tarea1
         {
             Console.Write("Ingrese el nombre del plato: ");
             string nombre = Console.ReadLine();
+            while (nombre == "")
+            {
+                Console.Write("Debe ingresar un nombre válido.\n");
+                Console.Write("Ingrese el nombre del plato: ");
+                nombre = Console.ReadLine();
+            }
 
-            Console.Write("Ingrese el precio del plato: ");
-            int precio = Convert.ToInt32(Console.ReadLine());
+            int precio = 0;
+            bool esValido = false;
+
+            while (!esValido)
+            {
+                try
+                {
+                    Console.Write("Ingrese el precio del plato: ");
+                    precio = Convert.ToInt32(Console.ReadLine());
+                    esValido = true;
+                }
+                catch (FormatException) {
+                    Console.Write("Debe ingresar un precio válido.\n");
+                }
+            }
+
 
             Console.Write("Ingrese el ID de la categoría del plato: ");
             int idCategoria = Convert.ToInt32(Console.ReadLine());
@@ -81,7 +109,7 @@ namespace Tarea1
 
             if (categoria == null)
             {
-                Console.WriteLine("El ID ingresado no pertenece a ninguna categoría.");
+                Console.WriteLine("El ID ingresado no pertenece a ninguna categoría. El plato no fue registrado. \nVolviendo al menú principal...");
                 return;
             }
             Plato plato = new(nombre, precio, categoria);
@@ -126,6 +154,12 @@ namespace Tarea1
         {
             Console.Write("Ingrese la descripción de la categoría: ");
             string descripcion = Console.ReadLine();
+            while (descripcion == "")
+            {
+                Console.Write("Debe ingresar una descripción válida.\n");
+                Console.Write("Ingrese la descripción de la categoría: ");
+                descripcion = Console.ReadLine();
+            }
 
             Console.Write("Es una categoría activa? (s/n): ");
             bool activa = Console.ReadLine().ToLower() == "s";
@@ -171,18 +205,68 @@ namespace Tarea1
         {
             Console.Write("Ingrese el nombre del cliente (sin apellidos): ");
             string nombre = Console.ReadLine();
+            while (nombre == "")
+            {
+                Console.Write("Debe ingresar un nombre válido.\n");
+                Console.Write("Ingrese el nombre del cliente (sin apellidos): ");
+                nombre = Console.ReadLine();
+            }
 
             Console.Write("Ingrese el primer apellido del cliente: ");
             string primApellido = Console.ReadLine();
+            while (primApellido == "")
+            {
+                Console.Write("Debe ingresar un apellido válido.\n");
+                Console.Write("Ingrese el primer apellido del cliente: ");
+                primApellido = Console.ReadLine();
+            }
 
             Console.Write("Ingrese el segundo apellido del cliente: ");
             string segApellido = Console.ReadLine();
+            while (segApellido == "")
+            {
+                Console.Write("Debe ingresar un apellido válido.\n");
+                Console.Write("Ingrese el segundo apellido del cliente: ");
+                segApellido = Console.ReadLine();
+            }
 
-            Console.Write("Ingrese la fecha de nacimiento del cliente con el formato mm/dd/aaaa: ");
-            DateTime fechaNacim = DateTime.Parse(Console.ReadLine());
+            DateTime fechaNacim = new DateTime();
+            bool esValido = false;
 
-            Console.Write("Ingrese el género del cliente M/F: ");
-            char genero = Char.ToUpper(Console.ReadKey().KeyChar);
+            while (!esValido)
+            {
+                try
+                {
+                    Console.Write("Ingrese la fecha de nacimiento del cliente con el formato mm/dd/aaaa: ");
+                    fechaNacim = DateTime.Parse(Console.ReadLine());
+                    esValido = true;
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("La fecha ingresada no es inválida.");
+                }
+            }
+
+            char genero = '\0';
+            bool generoValido = false;
+
+            while (!generoValido)
+            {
+                try
+                {
+                    Console.Write("Ingrese el género (M/F): ");
+                    genero = Char.ToUpper(Console.ReadKey().KeyChar);
+
+                    if (genero == 'M' || genero == 'F')
+                        generoValido = true;
+                    else
+                        throw new FormatException();
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Valor inválido.");
+                }
+            }
 
             Cliente cliente = new(nombre, primApellido, segApellido, fechaNacim, genero);
 
@@ -223,11 +307,36 @@ namespace Tarea1
 
         public static void RegistrarRestaurantePlato(ManagerRestaurantePlatos managerRestPlato, ManagerRestaurantes managerRest, ManagerPlatos managerPlato)
         {
-            Console.Write("Ingrese el ID del restaurante: ");
-            int idRestaurante = Convert.ToInt32(Console.ReadLine());
+            int idRestaurante = 0;
+            int idPlato = 0;
+            bool esValido = false;
 
-            Console.Write("Ingrese el ID del plato: ");
-            int idPlato = Convert.ToInt32(Console.ReadLine());
+            // Valida los datos ingresados
+            while (!esValido)
+            {
+                try
+                {
+                    Console.Write("Ingrese el ID del restaurante: ");
+                    idRestaurante = Convert.ToInt32(Console.ReadLine());
+                    esValido = true;
+                }
+                catch (FormatException)
+                {
+                    Console.Write("Debe ingresar un ID de restaurante válido.\n");
+                }
+
+                try
+                {
+                    Console.Write("Ingrese el ID del plato: ");
+                    idPlato = Convert.ToInt32(Console.ReadLine());
+                    esValido = true;
+                }
+                catch (FormatException)
+                {
+                    Console.Write("Debe ingresar un ID de plato válido.\n");
+                }
+            }
+
 
             // Revisa si existen los IDs ingresados
             if (managerRest.GetPorId(idRestaurante) != null && managerPlato.GetPorId(idPlato) != null)
@@ -235,38 +344,60 @@ namespace Tarea1
                 RestaurantePlato restPlato = new(idRestaurante, idPlato);
 
                 managerRestPlato.Registrar(restPlato);
-                Console.WriteLine("Dish successfully registered to restaurant!");
+                Console.WriteLine("Plato registrato en el restaurante de manera correcta.");
             }
             else
             {
-                Console.WriteLine("El ID del restaurante o plato es inválido.");
+                Console.WriteLine("El ID del restaurante o plato no existe.");
+            }
+
+            Console.Write("\nDesea registrar otro plato en un restaurante? (s) para confirmar: ");
+            string eleccion = Console.ReadLine();
+
+            if (eleccion == "s")
+            {
+                RegistrarRestaurantePlato(managerRestPlato, managerRest, managerPlato);
             }
         }
 
         public static void MostrarRestaurantePlato(ManagerRestaurantePlatos managerRestPlato, ManagerRestaurantes managerRest, ManagerPlatos managerPlato)
         {
-            Console.Write("Ingrese el ID del restaurante: ");
-            int idRestaurante = Convert.ToInt32(Console.ReadLine());
+            int idRestaurante;
+            bool esValido = false;
 
-            // Valida que el restaurante exista
-            if (managerRest.GetPorId(idRestaurante) != null)
+            while (!esValido)
             {
-                Restaurante restaurante = managerRest.GetPorId(idRestaurante);
-                Console.WriteLine($"El restaurante elegido es:\nID: {restaurante.Id}, Nombre: {restaurante.Nombre}, Dirección: {restaurante.Direccion}, Activo: {restaurante.Activo}, Teléfono: {restaurante.Telefono}");
-                Console.WriteLine($"Los platos asociados al restaurante {managerRest.GetPorId(idRestaurante).Nombre} son:\n");
-                
-                foreach (var restaurantePlato in managerRestPlato.GetTodos())
+                try
                 {
-                    if (restaurantePlato != null && restaurantePlato.IdRestaurante == idRestaurante)
+                    Console.Write("Ingrese el ID del restaurante: ");
+                    idRestaurante = Convert.ToInt32(Console.ReadLine());
+                    esValido = true;
+
+                    // Valida que el restaurante exista
+                    if (managerRest.GetPorId(idRestaurante) != null)
                     {
-                        var plato = managerPlato.GetPorId(restaurantePlato.IdPlato);
-                        Console.WriteLine($"ID del plato: {plato.Id}, nombre: {plato.Nombre}, Precio: {plato.Precio}, ID de la categoría: {plato.Categoria.Id}, Descripción de la categoría: {plato.Categoria.Descripcion}");
+                        Restaurante restaurante = managerRest.GetPorId(idRestaurante);
+                        Console.WriteLine($"El restaurante elegido es:\nID: {restaurante.Id}, Nombre: {restaurante.Nombre}, Dirección: {restaurante.Direccion}, Activo: {restaurante.Activo}, Teléfono: {restaurante.Telefono}");
+                        Console.WriteLine($"Los platos asociados al restaurante {managerRest.GetPorId(idRestaurante).Nombre} son:\n");
+
+                        foreach (var restaurantePlato in managerRestPlato.GetTodos())
+                        {
+                            if (restaurantePlato != null && restaurantePlato.IdRestaurante == idRestaurante)
+                            {
+                                var plato = managerPlato.GetPorId(restaurantePlato.IdPlato);
+                                Console.WriteLine($"ID del plato: {plato.Id}, nombre: {plato.Nombre}, Precio: {plato.Precio}, ID de la categoría: {plato.Categoria.Id}, Descripción de la categoría: {plato.Categoria.Descripcion}");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Id de restaurante inválido.");
                     }
                 }
-            }
-            else
-            {
-                Console.WriteLine("Id de restaurante inválido.");
+                catch (FormatException)
+                {
+                    Console.Write("Debe ingresar un ID válido.\n");
+                }
             }
         }
     }
