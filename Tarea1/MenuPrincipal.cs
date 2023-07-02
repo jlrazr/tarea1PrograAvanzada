@@ -8,12 +8,13 @@ internal class Program
     public static ManagerCategPlatos managerCategPlatos = new();
     public static ManagerClientes managerClientes = new();
     public static ManagerRestaurantePlatos managerRestPlatos = new();
+    public static ManagerExtra managerExtra = new();
 
     private static void Main(string[] args)
     {
         int eleccion = 0;
 
-        while (eleccion != 11)
+        while (eleccion != 12)
         {
             eleccion = MuestraMenu();
 
@@ -60,10 +61,14 @@ internal class Program
                     Helpers.MostrarRestaurantePlato(managerRestPlatos, managerRest, managerPlatos);
                     break;
                 case 11:
+                    Console.Clear();
+                    Helpers.RegisterExtra(managerExtra, managerCategPlatos);
+                    break;
+                case 12:
                     Console.WriteLine("Saliendo...");
                     break;
                 default:
-                    Console.WriteLine("Opción inválida. Por favor ingrese un número entre 1 y 11.");
+                    Console.WriteLine("Opción inválida. Por favor ingrese un número entre 1 y 12.");
                     break;
             }
         }
@@ -83,10 +88,11 @@ internal class Program
             Console.WriteLine("8. Consultar platos");
             Console.WriteLine("9. Consultar clientes");
             Console.WriteLine("10. Consultar platos por restaurante");
+            Console.WriteLine("11. Registrar extra para una categoría");
             Console.WriteLine("-------------------------------------------------------------------------");
-            Console.WriteLine("11. Salir");
+            Console.WriteLine("12. Salir");
 
-            Console.Write("\nIngrese su elección (1-11): ");
+            Console.Write("\nIngrese su elección (1-12): ");
             int eleccion;
 
             try

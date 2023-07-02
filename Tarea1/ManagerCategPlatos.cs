@@ -23,5 +23,18 @@ namespace Tarea1
         {
             return _categPlatos;
         }
+
+        public CategoriaPlato GetPorId(int id)
+        {
+            foreach (var categ in _categPlatos)
+            {
+                if (categ != null && categ.Id == id)
+                {
+                    return categ;
+                }
+            }
+
+            return null;
+        }
     }
 }

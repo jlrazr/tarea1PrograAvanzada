@@ -49,7 +49,6 @@ namespace Tarea1
 
             if (restaurantes[0] != null)
             {
-                Console.WriteLine($"El número de entradas en restaurantes es: {restaurantes.Length}");
                 Console.Write("---------  Inicio de la lista de restaurantes  ---------\n\n");
                 Console.Write("Los restaurantes registrados son: \n\n");
                 foreach (var restaurante in restaurantes)
@@ -131,7 +130,6 @@ namespace Tarea1
 
             if (platos[0] != null)
             {
-                Console.WriteLine($"El número de entradas en platos es: {platos.Length}");
                 Console.Write("---------  Inicio de la lista de platos  ---------\n\n");
                 Console.Write("Los platos registrados son: \n\n");
 
@@ -183,7 +181,6 @@ namespace Tarea1
 
             if (categorias[0] != null)
             {
-                Console.WriteLine($"El número de categorías registradas es: {categorias.Length}");
                 Console.Write("---------  Inicio de la lista de categorías de platos  ---------\n\n");
                 Console.Write("Las categorías registradas son: \n\n");
                 foreach (var categoria in categorias)
@@ -287,7 +284,6 @@ namespace Tarea1
 
             if (clientes[0] != null)
             {
-                Console.WriteLine($"El número de entradas en clientes es: {clientes.Length}");
                 Console.Write("---------  Inicio de la lista de clientes  ---------\n\n");
                 Console.Write("Los clientes registrados son: \n\n");
                 foreach (var cliente in clientes)
@@ -336,7 +332,6 @@ namespace Tarea1
                     Console.Write("Debe ingresar un ID de plato válido.\n");
                 }
             }
-
 
             // Revisa si existen los IDs ingresados
             if (managerRest.GetPorId(idRestaurante) != null && managerPlato.GetPorId(idPlato) != null)
@@ -406,6 +401,45 @@ namespace Tarea1
                 {
                     MostrarRestaurantePlato(managerRestPlato, managerRest, managerPlato);
                 }
+            }
+        }
+
+        public static void RegisterExtra(ManagerExtra managerExtra, ManagerCategPlatos managerCategPlato)
+        {
+            try
+            {
+                Console.Write("Ingrese la descripción de la extra: ");
+                string descripcion = Console.ReadLine();
+
+                Console.Write("Ingrese el ID de la categoría de plato: ");
+                int idCategoria = Convert.ToInt32(Console.ReadLine());
+
+                Console.Write("¿Está la extra activa? (s/n): ");
+                bool activa = Console.ReadLine().ToLower() == "s";
+
+                Console.Write("Ingrese el precio: ");
+                int precio = Convert.ToInt32(Console.ReadLine());
+                
+                var categoria = managerCategPlato.GetPorId(idCategoria);
+                if (categoria != null)
+                {
+                    var extra = new Extra(descripcion, idCategoria, activa, precio);
+
+                    managerExtra.RegistrarExtra(extra);
+                    Console.WriteLine("Extra registrada correctamente.");
+                }
+                else
+                {
+                    Console.WriteLine("El ID de la categoría es inválido.");
+                }
+            }
+            catch (FormatException)
+            {
+                Console.WriteLine("Ha ingresado datos inválidos. Por favor vuelva a intentarlo.");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Se ha producido un error: {ex.Message}");
             }
         }
     }
