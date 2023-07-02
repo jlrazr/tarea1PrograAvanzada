@@ -404,7 +404,7 @@ namespace Tarea1
             }
         }
 
-        public static void RegisterExtra(ManagerExtra managerExtra, ManagerCategPlatos managerCategPlato)
+        public static void RegistrarExtra(ManagerExtra managerExtra, ManagerCategPlatos managerCategPlato)
         {
             try
             {
@@ -440,6 +440,29 @@ namespace Tarea1
             catch (Exception ex)
             {
                 Console.WriteLine($"Se ha producido un error: {ex.Message}");
+            }
+        }
+
+        public static void MostrarExtras(ManagerExtra managerExtra, ManagerCategPlatos managerCategPlatos)
+        {
+            Console.Write("Ingrese el ID de la categoría para consultar sus extras: ");
+            int idCategoria = Convert.ToInt32(Console.ReadLine());
+
+            // Revisa que la categoría exista
+            if (managerCategPlatos.GetPorId(idCategoria) != null)
+            {
+                Console.WriteLine("Las extras para la categoría son:");
+                foreach (var extra in managerExtra.GetTodos())
+                {
+                    if (extra != null && extra.IdCategoriaPlato == idCategoria)
+                    {
+                        Console.WriteLine($"ID del extra: {extra.ID}, Descripción: {extra.Descripcion}, Precio: {extra.Precio}, Activa: {extra.Activo}");
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("El ID ingresado es inválido.");
             }
         }
     }

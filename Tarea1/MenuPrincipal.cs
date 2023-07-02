@@ -14,7 +14,7 @@ internal class Program
     {
         int eleccion = 0;
 
-        while (eleccion != 12)
+        while (eleccion != 13)
         {
             eleccion = MuestraMenu();
 
@@ -62,13 +62,17 @@ internal class Program
                     break;
                 case 11:
                     Console.Clear();
-                    Helpers.RegisterExtra(managerExtra, managerCategPlatos);
+                    Helpers.RegistrarExtra(managerExtra, managerCategPlatos);
                     break;
                 case 12:
+                    Console.Clear();
+                    Helpers.MostrarExtras(managerExtra, managerCategPlatos);
+                    break;
+                case 13:
                     Console.WriteLine("Saliendo...");
                     break;
                 default:
-                    Console.WriteLine("Opción inválida. Por favor ingrese un número entre 1 y 12.");
+                    Console.WriteLine("Opción inválida. Por favor ingrese un número entre 1 y 13.");
                     break;
             }
         }
@@ -89,10 +93,11 @@ internal class Program
             Console.WriteLine("9. Consultar clientes");
             Console.WriteLine("10. Consultar platos por restaurante");
             Console.WriteLine("11. Registrar extra para una categoría");
+            Console.WriteLine("12. Mostrar extras de una categoría");
             Console.WriteLine("-------------------------------------------------------------------------");
-            Console.WriteLine("12. Salir");
+            Console.WriteLine("13. Salir");
 
-            Console.Write("\nIngrese su elección (1-12): ");
+            Console.Write("\nIngrese su elección (1-13): ");
             int eleccion;
 
             try
